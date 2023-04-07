@@ -271,16 +271,70 @@ struct node *sort(){
     }
     return start;
 }
+struct node *count(){
+    struct node *temp;
+    int even=0,odd=0,total=0;
+    temp=start;
+    while(temp!=NULL){
+      
+        if(temp->data%2==0){
+            ++even;
+        }
+        else ++odd;
+        ++total;
+        temp=temp->next;
+    }
+    printf("Total number of nodes is %d \nTotal Even nodes is : %d \t Odd is:%d",total,even,odd);
+    printf("\n");
+    return start;
+}
+struct node *addInSorted(){
+    struct node *temp,*pre;
+    int item;
+    printf("Enter item to enter in sorted Linked List: ");
+    scanf("%d",&item);
+    struct node *p;
+    p=(struct node *)malloc(sizeof(struct node));
+    p->data=item;
 
+    if(start==NULL){
+        p->next=NULL;
+        start=p;
+
+    }
+    else{
+        temp=start;
+        while(temp->next!=NULL && temp->data<item){
+            pre=temp;
+            
+            temp=temp->next;
+        }
+        if(temp->next==NULL){
+            p->next=NULL;
+            temp->next=p;
+        }
+        else if(temp==start){
+            p->next=start;
+            start=p;
+        }
+        else{
+            pre->next=p;
+            p->next=temp;
+        }
+
+    }
+    printf("\n");
+    return start;
+}
 
 
 
 int main(){
 int option;
-printf("Option:\n1.Create  the Linked List \n2.Display the list\n3.Add a node in the begining of the list\n4.Add a node in the end\n5.Add the node before a given node\n6.Add a node after a given node\n7.Delete a node from the beggining\n8.Delete a node from the end \n9.Delete a given node \n10.Delete a node after a given node\n11.Delete the entire list\n12.Sort the list\n13.Exit\n");
+printf("Option:\n1.Create  the Linked List \n2.Display the list\n3.Add a node in the begining of the list\n4.Add a node in the end\n5.Add the node before a given node\n6.Add a node after a given node\n7.Delete a node from the beggining\n8.Delete a node from the end \n9.Delete a given node \n10.Delete a node after a given node\n11.Delete the entire list\n12.Sort the list\n13.Add in Sorted\n14.Count number of total,even,odd nodes\n15.Exit\n");
 printf("Enter your option: ");
 scanf("%d",&option);
-while(option!=13){
+while(option!=15){
     switch(option){
         case 1:start=create();
         break;
@@ -315,6 +369,12 @@ while(option!=13){
         break;
         case 12:
         start = sort();
+        break;
+        case 13:
+        start=addInSorted();
+        break;
+        case 14:
+        start=count();
         break;
     }
     printf("\nEnter your option: ");
