@@ -27,9 +27,9 @@ struct node *putInLink(int item){
 }
 
 
-
-
-struct node *create(){
+    struct node *
+    create()
+{
     int item;
     printf("Enter item to insert in Linked List(-999 to eixt): ");
     scanf("%d",&item);
